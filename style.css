@@ -1,0 +1,573 @@
+/* Windows 11 Fluent Design CSS System */
+
+:root {
+    --win-accent: #0078d4;
+    --win-accent-light: #60cdff;
+    --win-bg-dark: #202020;
+    --win-card-bg: rgba(36, 36, 36, 0.7);
+    --win-card-bg-active: rgba(45, 45, 45, 0.95);
+    --win-border: rgba(255, 255, 255, 0.09);
+    --win-border-glow: rgba(96, 205, 255, 0.4);
+    --win-text: #ffffff;
+    --win-text-secondary: rgba(255, 255, 255, 0.75);
+    --win-text-disabled: rgba(255, 255, 255, 0.35);
+    
+    /* Day Status Colors */
+    --color-sat: #60cdff;
+    --color-sun-holiday: #ff5f56;
+    --color-weekday: #e1e1e1;
+    
+    /* Layout & Corners */
+    --win-radius: 8px; /* Too round is macOS, too square is Win10. 8px is perfect Windows 11 style. */
+    --win-transition: all 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1a1a1a;
+    /* Mica/Desktop wallpaper simulation background */
+    background-image: radial-gradient(circle at 10% 20%, rgba(12, 38, 77, 0.7) 0%, rgba(20, 20, 20, 0.95) 90%);
+    background-attachment: fixed;
+    font-family: 'Segoe UI', 'Segoe UI Variable', -apple-system, 'Inter', 'Noto Sans KR', sans-serif;
+    color: var(--win-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    line-height: 1.5;
+}
+
+/* App Container */
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* App Header */
+.app-header {
+    background: rgba(30, 30, 30, 0.6);
+    backdrop-filter: blur(20px) saturate(1.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    border: 1px solid var(--win-border);
+    border-radius: var(--win-radius);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.app-title-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.app-icon-wrapper {
+    background: var(--win-accent);
+    width: 42px;
+    height: 42px;
+    border-radius: var(--win-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 12px rgba(0, 120, 212, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.app-logo-icon {
+    width: 22px;
+    height: 22px;
+    color: white;
+}
+
+.app-header h1 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.app-header .subtitle {
+    font-size: 0.8rem;
+    color: var(--win-text-secondary);
+}
+
+/* Connection Status */
+.connection-status-panel {
+    font-size: 0.8rem;
+}
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--win-border);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ffd200; /* Yellow for checking */
+}
+
+.status-indicator.connected .status-dot {
+    background-color: #107c41; /* Green */
+    box-shadow: 0 0 8px #107c41;
+}
+
+.status-indicator.proxy .status-dot {
+    background-color: #0078d4; /* Blue */
+    box-shadow: 0 0 8px #0078d4;
+}
+
+.status-indicator.error .status-dot {
+    background-color: #e81123; /* Red */
+    box-shadow: 0 0 8px #e81123;
+}
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 16px;
+}
+
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Widgets Container (Windows 11 Fluent panels) */
+.widget {
+    background: var(--win-card-bg);
+    backdrop-filter: blur(24px) saturate(1.8);
+    -webkit-backdrop-filter: blur(24px) saturate(1.8);
+    border: 1px solid var(--win-border);
+    border-radius: var(--win-radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: var(--win-transition);
+}
+
+.widget:hover {
+    border-color: rgba(255, 255, 255, 0.13);
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.widget-header h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.widget-header h2 i {
+    width: 18px;
+    height: 18px;
+    color: var(--win-accent-light);
+}
+
+/* Windows 11 Elements Custom styling */
+.win-select {
+    background: rgba(45, 45, 45, 0.85);
+    border: 1px solid var(--win-border);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.45);
+    border-radius: 4px;
+    color: var(--win-text);
+    padding: 6px 32px 6px 12px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 14px;
+    transition: var(--win-transition);
+}
+
+.win-select:hover {
+    background-color: rgba(55, 55, 55, 0.95);
+    border-bottom-color: var(--win-accent-light);
+}
+
+.win-select:focus {
+    border-bottom-color: var(--win-accent-light);
+    box-shadow: 0 0 0 2px rgba(96, 205, 255, 0.2);
+}
+
+.win-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--win-border);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    color: var(--win-text);
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    outline: none;
+    transition: var(--win-transition);
+}
+
+.win-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom-color: var(--win-accent-light);
+}
+
+.win-btn:active {
+    background: rgba(255, 255, 255, 0.03);
+    transform: scale(0.98);
+}
+
+.win-btn i {
+    width: 14px;
+    height: 14px;
+}
+
+.icon-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 4px;
+}
+
+.dropdown-group {
+    display: flex;
+    gap: 8px;
+}
+
+/* Calendar controls layout */
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Calendar Grid Styling */
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--win-text-secondary);
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.weekday.sun {
+    color: var(--color-sun-holiday);
+}
+
+.weekday.sat {
+    color: var(--color-sat);
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+/* Calendar Day Cells (Neat Windows 11 card items) */
+.calendar-day {
+    position: relative;
+    aspect-ratio: 1.15;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    transition: var(--win-transition);
+}
+
+.calendar-day:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--win-accent-light);
+    transform: scale(1.02);
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Empty days filler */
+.calendar-day.empty {
+    background: transparent !important;
+    border: none !important;
+    cursor: default;
+    pointer-events: none;
+}
+
+.day-number-label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-weekday);
+}
+
+.calendar-day.saturday .day-number-label {
+    color: var(--color-sat);
+}
+
+.calendar-day.sunday .day-number-label,
+.calendar-day.holiday .day-number-label {
+    color: var(--color-sun-holiday);
+}
+
+/* Today style marker */
+.calendar-day.today {
+    background: rgba(0, 120, 212, 0.15);
+    border: 1px solid var(--win-accent);
+}
+.calendar-day.today::before {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--win-accent-light);
+}
+
+/* Selected style marker */
+.calendar-day.selected {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid var(--win-accent-light) !important;
+    box-shadow: 0 0 8px rgba(96, 205, 255, 0.3);
+}
+
+/* Holiday text label in cell */
+.day-holiday-name {
+    font-size: 0.65rem;
+    color: var(--color-sun-holiday);
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    align-self: flex-start;
+    font-weight: 500;
+}
+
+/* Outside month days style */
+.calendar-day.other-month {
+    opacity: 0.25;
+}
+
+/* Legend items styles */
+.calendar-legend {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.75rem;
+    color: var(--win-text-secondary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+}
+
+.weekday-dot { background-color: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); }
+.sat-dot { background-color: var(--color-sat); }
+.holiday-dot { background-color: var(--color-sun-holiday); }
+.today-dot { background-color: var(--win-accent); border: 1px solid var(--win-accent-light); }
+
+/* Detail Widget Panels */
+.detail-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--win-radius);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: var(--win-transition);
+}
+
+.info-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+}
+
+.date-big-display {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.day-num {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--win-accent-light);
+    min-width: 48px;
+    text-align: center;
+}
+
+.date-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-date {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.day-desc {
+    font-size: 0.75rem;
+    color: var(--win-text-secondary);
+    font-weight: 500;
+}
+
+.day-desc.is-holiday {
+    color: var(--color-sun-holiday);
+    font-weight: 600;
+}
+
+/* Monthly Holiday Summary Card */
+.summary-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex-grow: 1;
+}
+
+.summary-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--win-accent-light);
+}
+
+.summary-title i {
+    width: 18px;
+    height: 18px;
+}
+
+.holiday-list-container {
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Custom Scrollbar for Holiday List */
+.holiday-list-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.holiday-list-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.holiday-list-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.holiday-list-ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.holiday-list-li {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    border-radius: 6px;
+    padding: 10px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--win-transition);
+}
+
+.holiday-list-li:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.holiday-list-li .h-date {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--win-text-secondary);
+}
+
+.holiday-list-li .h-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-sun-holiday);
+}
+
+.holiday-list-empty {
+    font-size: 0.8rem;
+    color: var(--win-text-disabled);
+    text-align: center;
+    padding: 24px 0;
+}
+
+/* Helper Utilities */
+.hidden {
+    display: none !important;
+}
+
+.win-btn.secondary-btn {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.win-btn.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
